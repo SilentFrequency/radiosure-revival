@@ -1,0 +1,11 @@
+# Nothing personal ever goes in this repo.
+RadioSure.xml
+RadioSure_*.xml
+update-log.txt
+Stations/
+_previous/
+*.rsd
+
+# Local build output and packaging
+*.zip
+staging/
