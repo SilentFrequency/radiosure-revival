@@ -58,17 +58,23 @@ on either build.
 
 ---
 
-## Installing the skin
+## The skins
 
-1. Copy the folder `Skin\Radiation King.rsn` into RadioSure's `Skins` folder.
+| Skin | Size | Notes |
+|---|---|---|
+| **Radiation King** | 490×346 | The original. Stock control layout — same buttons in the same places, restyled. Generated entirely from `Build-RadiationKingSkin.ps1`. |
+| **Radiation King Deluxe** | 900×620 | Mahogany and brass, gold sunburst grille, and a magic-eye tuning indicator. Reordered layout with a Minimize button. |
+
+Both include the expanded **and** collapsed window states.
+
+## Installing a skin
+
+1. Copy the whole `<Name>.rsn` folder out of `Skins\` into RadioSure's own
+   `Skins` folder.
    - Usually `%LOCALAPPDATA%\RadioSure\Skins`, next to `RadioSure.exe`.
-2. Start RadioSure → **Options** → pick **Radiation King**.
+2. Start RadioSure → **Options** → pick the skin by name.
 
-That's it. The skin keeps the stock control layout exactly — same buttons in the
-same places — so nothing about how you use the player changes.
-
-Both window states are included: `skin.rsn` (expanded, 490×346) and `skin2.rsn`
-(collapsed, 490×100).
+That's it. Nothing about how you use the player changes.
 
 ### What "complete" means for a skin
 
@@ -94,9 +100,12 @@ written down anywhere else, which is probably why so many skins get it wrong.
 
 ### Recolouring it
 
-`Skin\Build-RadiationKingSkin.ps1` generates every image in the skin from code —
-there are no hand-painted assets. Change the palette block at the top and re-run
-it for a different colourway. Requires nothing but Windows PowerShell.
+`Skins\Build-RadiationKingSkin.ps1` generates every image in the original skin
+from code — there are no hand-painted assets. Change the palette block at the top
+and re-run it for a different colourway. Requires nothing but Windows PowerShell.
+
+Deluxe currently ships as finished art only; its generator is not in this repo
+yet.
 
 While RadioSure is open it holds the skin PNGs, so close it before regenerating.
 **Press F5 in RadioSure to reload a skin without restarting** — invaluable when
