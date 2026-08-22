@@ -29,6 +29,33 @@ place, plus a skin, plus notes.
 
 ---
 
+## Getting RadioSure itself
+
+Nothing here includes the player — you need a copy first, and TheBestware's own
+site has been gone since March 2022. The last free installer is preserved here:
+
+- **[JazzfanRS/Radiosure-station-database](https://github.com/JazzfanRS/Radiosure-station-database)**
+  — `RS-2.2.1046-setup.exe`, the last known free build, alongside the final
+  official 2022 station database.
+- **[radiosure.fr](https://www.radiosure.fr)** — the surviving community hub,
+  and the daily-rebuilt database if you would rather not run a script.
+
+**Do not pay anyone for RadioSure.** The free build always was free, the paid
+licences came from a developer who is no longer trading, and nobody else has
+standing to sell it. If you find it for sale bundled with a skin pack, what you
+are being offered is someone else's binary — and repackaged installers of
+abandoned software are a well-worn way to deliver something you did not ask for.
+Take it from the preservation repo above, where the file is public and its
+history is visible.
+
+**If you already own the paid version, leave it alone.** The paid and free lines
+number *separately*, so the free `2.2.1046` is not an upgrade over a paid
+`2.2.1042` — installing it replaces a licensed binary with a lesser one. Back up
+your install folder before you experiment. The updater and skin in this repo work
+on either build.
+
+---
+
 ## Installing the skin
 
 1. Copy the folder `Skin\Radiation King.rsn` into RadioSure's `Skins` folder.
