@@ -88,9 +88,19 @@ the folder name without the extension.
 
 | File | Purpose |
 |---|---|
-| `skin.rsn` | Layout for the **expanded** window (490×346) |
-| `skin2.rsn` | Layout for the **collapsed** window (490×100) |
-| `SkinPreview.png` | 256×195 thumbnail for the skin picker |
+| `skin.rsn` | Layout for the **expanded** window |
+| `skin2.rsn` | Layout for the **collapsed** window |
+| `SkinPreview.png` | Thumbnail for the skin picker |
+
+**The window is not a fixed size.** The stock skin is 490×346 expanded and
+490×100 collapsed, and it is easy to assume those numbers are the format. They
+are not — `<width>` and `<height>` inside `<Window>` set whatever you like, and
+every control is positioned in absolute pixels within it. Skins in this repo run
+at 620×560 and 900×620. If you want a big cabinet, take one.
+
+One authoring detail: the background PNG is a pixel larger than the declared
+window in each direction (a 620×560 window ships a 621×561 background). Match
+that and the edge lands cleanly.
 
 `skin2.rsn` is the same document with a smaller height, buttons moved up, and
 the list, filter and found-count set to `<visible>0</visible>`. A skin without it
