@@ -40,13 +40,15 @@ site has been gone since March 2022. The last free installer is preserved here:
 - **[radiosure.fr](https://www.radiosure.fr)** — the surviving community hub,
   and the daily-rebuilt database if you would rather not run a script.
 
-**Do not pay anyone for RadioSure.** The free build always was free, the paid
-licences came from a developer who is no longer trading, and nobody else has
-standing to sell it. If you find it for sale bundled with a skin pack, what you
-are being offered is someone else's binary — and repackaged installers of
-abandoned software are a well-worn way to deliver something you did not ask for.
-Take it from the preservation repo above, where the file is public and its
-history is visible.
+**Do not pay anyone for RadioSure.** It is being sold — typically as a skin pack
+with the player bundled in, a dozen colourful skins and a copy of the app. That
+copy is not theirs to give. The free build always was free, the paid licences
+came from a developer no longer trading, and nobody has acquired the right to
+resell either. What you would actually be buying is a repackaged installer of
+abandoned software from a stranger, which is a well-worn way to deliver
+something you did not ask for. Take the player from the preservation repo above,
+where the file is public and its history is visible, and take skins from people
+who give them away.
 
 **If you already own the paid version, leave it alone.** The paid and free lines
 number *separately*, so the free `2.2.1046` is not an upgrade over a paid
@@ -67,6 +69,28 @@ same places — so nothing about how you use the player changes.
 
 Both window states are included: `skin.rsn` (expanded, 490×346) and `skin2.rsn`
 (collapsed, 490×100).
+
+### What "complete" means for a skin
+
+Plenty of skins in circulation — including ones people charge for — look
+handsome in a screenshot and are unfinished underneath. A screenshot only ever
+shows one window state, so it cannot show you what is missing. Worth checking
+before you install one, and worth checking in this one:
+
+- **Is `skin2.rsn` there?** Without it the collapsed window falls back to the
+  stock layout, so shrinking the player throws away the artwork.
+- **Are all three button states drawn?** `X.png`, `X-hot.png`, `X-pressed.png`,
+  plus the `-2` variants for toggles like Play/Stop, Mute, Rec and OnTop. Miss
+  the toggle variants and the button stops telling you what state it is in.
+- **Do the readouts sit on the artwork, or on grey plates?** A `<BkColor>` with
+  alpha 0 makes a label transparent; without it every text field paints an
+  opaque system-coloured rectangle over the design.
+- **Is the spectrum well clean?** `<GlassLevel>` must be `0` on `<Spectrum>` or a
+  pale sheen is painted over the top of it, which reads as a grey box.
+
+All four are documented, with the reasoning, in
+[`SKIN-AND-RSD-FORMAT.md`](SKIN-AND-RSD-FORMAT.md). None of it appears to be
+written down anywhere else, which is probably why so many skins get it wrong.
 
 ### Recolouring it
 
