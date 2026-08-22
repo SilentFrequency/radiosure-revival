@@ -62,10 +62,10 @@ on either build.
 
 | Skin | Size | Notes |
 |---|---|---|
-| **Radiation King** | 490×346 | The original. Stock control layout — same buttons in the same places, restyled. Generated entirely from `Build-RadiationKingSkin.ps1`. |
-| **Radiation King Deluxe** | 900×620 | Mahogany and brass, gold sunburst grille, and a magic-eye tuning indicator. Reordered layout with a Minimize button. |
+| **Radiation King** | 490×346 | Stock control layout — same buttons in the same places, restyled. Generated entirely from `Build-RadiationKingSkin.ps1`. |
 
-Both include the expanded **and** collapsed window states.
+Both the expanded and collapsed window states are included. More skins are in
+progress.
 
 ## Installing a skin
 
@@ -100,12 +100,9 @@ written down anywhere else, which is probably why so many skins get it wrong.
 
 ### Recolouring it
 
-`Skins\Build-RadiationKingSkin.ps1` generates every image in the original skin
-from code — there are no hand-painted assets. Change the palette block at the top
-and re-run it for a different colourway. Requires nothing but Windows PowerShell.
-
-Deluxe currently ships as finished art only; its generator is not in this repo
-yet.
+`Skins\Build-RadiationKingSkin.ps1` generates every image in the skin from code —
+there are no hand-painted assets. Change the palette block at the top and re-run
+it for a different colourway. Requires nothing but Windows PowerShell.
 
 While RadioSure is open it holds the skin PNGs, so close it before regenerating.
 **Press F5 in RadioSure to reload a skin without restarting** — invaluable when
