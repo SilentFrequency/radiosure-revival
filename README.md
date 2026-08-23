@@ -1,8 +1,9 @@
-# Radiation King — a skin and a station updater for Radio? Sure!
+# Radiation King — skins and a station updater for Radio? Sure!
 
 Two things for anyone still running RadioSure in 2026:
 
-1. **Radiation King** — a skin styled after the 1950s valve radio from Fallout.
+1. **Radiation King** — three skins styled after the 1950s valve radio from
+   Fallout, in three sizes.
 2. **A station database updater** — a PowerShell script that rebuilds RadioSure's
    station list from the live [Radio-Browser](https://www.radio-browser.info)
    directory. About 50,000 working stations, and it can run itself weekly.
@@ -63,9 +64,14 @@ on either build.
 | Skin | Size | Notes |
 |---|---|---|
 | **Radiation King** | 490×346 | Stock control layout — same buttons in the same places, restyled. Generated entirely from `Build-RadiationKingSkin.ps1`. |
+| **Radiation King Cabinet** | 620×560 | Cream and wood tabletop set. Oval woven grille, engraved control labels, and a Minimize button the other two do not have. |
+| **Radiation King Deluxe** | 720×496 | Mahogany and brass. Gold sunburst grille, and the spectrum analyser lives inside a green magic-eye tube. |
 
-Both the expanded and collapsed window states are included. More skins are in
-progress.
+Every skin includes both the expanded and the collapsed window state.
+
+![Radiation King Cabinet](screenshot-cabinet.png)
+
+![Radiation King Deluxe](screenshot-deluxe.png)
 
 ## Installing a skin
 
@@ -100,9 +106,11 @@ written down anywhere else, which is probably why so many skins get it wrong.
 
 ### Recolouring it
 
-`Skins\Build-RadiationKingSkin.ps1` generates every image in the skin from code —
-there are no hand-painted assets. Change the palette block at the top and re-run
-it for a different colourway. Requires nothing but Windows PowerShell.
+`Skins\Build-RadiationKingSkin.ps1` generates every image in the 490×346 skin
+from code — there are no hand-painted assets. Change the palette block at the
+top and re-run it for a different colourway. Requires nothing but Windows
+PowerShell. The Cabinet and Deluxe skins are drawn the same way, from their own
+generators; those two scripts are not in the repo yet.
 
 While RadioSure is open it holds the skin PNGs, so close it before regenerating.
 **Press F5 in RadioSure to reload a skin without restarting** — invaluable when
