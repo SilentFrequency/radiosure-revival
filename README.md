@@ -82,6 +82,14 @@ the controls over a photographic render, which is the only skin in this repo
 whose background is not drawn by a script — see the credits for where the image
 came from. Pick whichever you prefer; both are complete.
 
+**A matching wallpaper ships with the photo skin**, in `Skins\source\`. Set it
+as your desktop and the graveyard in the window carries on into the graveyard
+behind it, which is the closest this format will ever get to a shaped window —
+a skin can never be cut to the outline of its artwork (see the format notes), so
+the next best thing is a ground that does not want hiding. The screenshot below
+is the pair in use. The skin is graded to sit against that wallpaper; if you use
+a different desktop, `-PhotoNight` is the dial.
+
 ![Radiation King Cabinet](screenshot-cabinet.png)
 
 ![Radiation King Deluxe](screenshot-deluxe.png)
@@ -251,8 +259,9 @@ connection. No installs, no modules, no dependencies.
   files. **Hallows Eve Photo** is the exception: its background is a photographic
   render, and the source image ships in `Skins\source\` so the skin can be
   rebuilt.
-- **The headstone photograph** in Hallows Eve Photo was generated with
-  **Nano Banana**, Google's image model, from text prompts written by the author.
+- **The headstone photograph** in Hallows Eve Photo, and the matching wallpaper
+  beside it, were both generated with **Nano Banana**, Google's image model, from
+  text prompts written by the author.
   It is not a photograph of a real grave, not stock imagery, and not anyone
   else's work — the image was rendered to order for this skin, and the prompt
   behind it is the author's own. The name and dates carved into it are invented.
