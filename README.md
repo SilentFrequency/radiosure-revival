@@ -2,8 +2,8 @@
 
 Two things for anyone still running RadioSure in 2026:
 
-1. **Radiation King** — three skins styled after the 1950s valve radio from
-   Fallout, in three sizes.
+1. **Radiation King** — four skins: three styled after the 1950s valve radio
+   from Fallout, and one upright one cut as a headstone.
 2. **A station database updater** — a PowerShell script that rebuilds RadioSure's
    station list from the live [Radio-Browser](https://www.radio-browser.info)
    directory. About 50,000 working stations, and it can run itself weekly.
@@ -66,12 +66,20 @@ on either build.
 | **Radiation King** | 490×346 | Stock control layout — same buttons in the same places, restyled. Generated entirely from `Build-RadiationKingSkin.ps1`. |
 | **Radiation King Cabinet** | 620×560 | Cream and wood tabletop set. Oval woven grille, engraved control labels, and a Minimize button the other two do not have. |
 | **Radiation King Deluxe** | 720×496 | Mahogany and brass. Gold sunburst grille, and the spectrum analyser lives inside a green magic-eye tube. |
+| **Hallows Eve** | 430×780 | The odd one out: a **vertical** player, cut as a weathered granite headstone. Generated entirely from `Build-HallowsEveSkin.ps1`. |
 
 Every skin includes both the expanded and the collapsed window state.
+
+Hallows Eve is worth a word. It is upright rather than landscape, which the
+format allows and nothing else here uses, and the collapsed state is a single
+narrow lintel of the same stone. As with the other skins, some things in the
+artwork are left for you to find rather than listed here.
 
 ![Radiation King Cabinet](screenshot-cabinet.png)
 
 ![Radiation King Deluxe](screenshot-deluxe.png)
+
+![Hallows Eve](screenshot-hallows-eve.png)
 
 ## Installing a skin
 
@@ -106,11 +114,12 @@ written down anywhere else, which is probably why so many skins get it wrong.
 
 ### Recolouring it
 
-`Skins\Build-RadiationKingSkin.ps1` generates every image in the 490×346 skin
-from code — there are no hand-painted assets. Change the palette block at the
-top and re-run it for a different colourway. Requires nothing but Windows
-PowerShell. The Cabinet and Deluxe skins are drawn the same way, from their own
-generators; those two scripts are not in the repo yet.
+`Skins\Build-RadiationKingSkin.ps1` and `Skins\Build-HallowsEveSkin.ps1`
+generate every image in their skins from code — there are no hand-painted
+assets. Each has a palette block at the top and a layout table below it; change
+either and re-run. Requires nothing but Windows PowerShell. The Cabinet and
+Deluxe skins are drawn the same way, from their own generators; those two
+scripts are not in the repo yet.
 
 While RadioSure is open it holds the skin PNGs, so close it before regenerating.
 **Press F5 in RadioSure to reload a skin without restarting** — invaluable when
