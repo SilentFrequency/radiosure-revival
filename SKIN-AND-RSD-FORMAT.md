@@ -197,3 +197,23 @@ Useful specifics:
 - Keep generator scripts pure ASCII, or save them UTF-8 **with** BOM. Windows
   PowerShell reads BOM-less scripts as the system code page and mangles any
   non-ASCII string literals.
+
+## The window is always a rectangle
+
+A skin cannot be a shaped window. If you were hoping to cut a player out to the
+silhouette of its artwork — a radio, a headstone, anything with a profile — it
+is not available, and it is worth knowing before you draw for it.
+
+- **Alpha in the background PNG is not honoured as window transparency.**
+  Pixels at alpha 0 composite to **white**, not to the desktop. Tested by
+  building a skin whose background was 16% fully transparent: the transparent
+  region rendered as a solid white ground filling the window rectangle.
+- **`<Rounded>` is a corner radius, not a mask.** It rounds the corners of the
+  rectangle and nothing more. There is no path, region or mask field.
+- **`<Transparent>` exists but belongs to `<List>`**, not to `<Window>` — it
+  controls the station list's background, not the window shape.
+
+The practical consequence: whatever sits around your artwork is part of the
+skin and has to be *designed*, not wished away. Give it something deliberate —
+a ground, a shadow, a surround that reads as intentional — because the rectangle
+is going to be visible no matter what you put in the alpha channel.
