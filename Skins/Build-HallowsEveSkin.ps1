@@ -20,7 +20,16 @@ param(
     [string] $SkinName = 'Hallows Eve',
     # Leave everything outside the stone at alpha 0, to find out whether
     # RadioSure honours per-pixel alpha or only clips to a rounded rectangle.
-    [switch] $TransparentGround
+    [switch] $TransparentGround,
+
+    # Version 2 route: use a photograph as the whole background instead of
+    # drawing the stone. No fretwork is drawn over it - the photo carries
+    # everything, including its own carved lettering.
+    [string] $Photo,
+    # Where to take the portrait crop from, as a fraction of the photo width
+    [single] $PhotoCentre = 0.5,
+    # How hard to push it toward night. 0 = untouched, 1 = black.
+    [single] $PhotoNight = 0.42
 )
 
 $ErrorActionPreference = 'Stop'
@@ -856,6 +865,77 @@ function Draw-ChiselledEdge ($g, $outer, [single]$cx, [single]$cy, [int]$band, [
     $flat.Dispose()
 }
 
+function Draw-PhotoGround ($g, [int]$w, [int]$h, [string]$path, [single]$centre, [single]$night, [int]$forceCropW = 0, [single]$bandY = 0.5) {
+    # Fill the window with a photograph. The source is landscape and the window
+    # is portrait, so take the tallest portrait crop the photo allows and slide
+    # it horizontally to sit over the subject - never squash it to fit.
+    $img = [System.Drawing.Image]::FromFile($path)
+    try {
+        $targetAspect = $w / $h
+        if ($forceCropW -gt 0) {
+            # The collapsed strip is four times wider than it is tall. Letting it
+            # take the widest crop available means the whole graveyard scaled to
+            # 30%, which shares no visible surface with the expanded window.
+            # Pinning the crop width to the expanded one instead takes a band of
+            # the same stone, at the same scale, so the two states match.
+            $cropW = [Math]::Min($forceCropW, $img.Width)
+            $cropH = [int]([Math]::Round($cropW / $targetAspect))
+        } else {
+            $cropH = $img.Height
+            $cropW = [int]([Math]::Round($cropH * $targetAspect))
+            if ($cropW -gt $img.Width) {
+                $cropW = $img.Width
+                $cropH = [int]([Math]::Round($cropW / $targetAspect))
+            }
+        }
+        $cropX = [int]([Math]::Round(($img.Width * $centre) - ($cropW / 2)))
+        $cropX = [Math]::Max(0, [Math]::Min($cropX, ($img.Width - $cropW)))
+        $cropY = [int]([Math]::Round(($img.Height * $bandY) - ($cropH / 2)))
+        $cropY = [Math]::Max(0, [Math]::Min($cropY, ($img.Height - $cropH)))
+
+        Write-Host ("    photo {0}x{1}, crop {2}x{3} at {4},{5} -> {6}x{7} ({8:P1} scale)" -f `
+            $img.Width, $img.Height, $cropW, $cropH, $cropX, $cropY, $w, $h, ($w / $cropW)) -ForegroundColor DarkGray
+
+        $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+        $g.DrawImage($img,
+            (New-Object System.Drawing.Rectangle(0, 0, $w, $h)),
+            (New-Object System.Drawing.Rectangle($cropX, $cropY, $cropW, $cropH)),
+            [System.Drawing.GraphicsUnit]::Pixel)
+    } finally { $img.Dispose() }
+
+    # Grade it for night. The source is an overcast daylight photograph and the
+    # rest of the skin is lit by one amber source, so without this the artwork
+    # and the readouts look like they come from two different places.
+    $flat = New-Object System.Drawing.SolidBrush ([System.Drawing.Color]::FromArgb([int](210 * $night), $Ink.R, $Ink.G, $Ink.B))
+    $g.FillRectangle($flat, 0, 0, $w, $h); $flat.Dispose()
+
+    # Heavier at the foot than the head, so the light still reads as from above
+    $grad = New-Object System.Drawing.Drawing2D.LinearGradientBrush(
+        (New-Object System.Drawing.Rectangle(0, 0, $w, $h)),
+        [System.Drawing.Color]::FromArgb(0, $Ink.R, $Ink.G, $Ink.B),
+        [System.Drawing.Color]::FromArgb([int](150 * $night), $Ink.R, $Ink.G, $Ink.B), 90)
+    $g.FillRectangle($grad, 0, 0, $w, $h); $grad.Dispose()
+
+    # Vignette, drawn as four edge gradients rather than a radial brush so the
+    # centre of the stone stays completely untouched
+    $v = [int](130 * $night)
+    $edges = @(
+        @{ r = (New-Object System.Drawing.Rectangle(0, 0, $w, 90));                a = 0; b = 90 },
+        @{ r = (New-Object System.Drawing.Rectangle(0, ($h - 120), $w, 120));      a = 270; b = 90 },
+        @{ r = (New-Object System.Drawing.Rectangle(0, 0, 70, $h));                a = 0; b = 0 },
+        @{ r = (New-Object System.Drawing.Rectangle(($w - 70), 0, 70, $h));        a = 180; b = 0 })
+    for ($i = 0; $i -lt 4; $i++) {
+        $e = $edges[$i]
+        $angle = if ($i -lt 2) { 90 } else { 0 }
+        $c1 = [System.Drawing.Color]::FromArgb($v, $Ink.R, $Ink.G, $Ink.B)
+        $c2 = [System.Drawing.Color]::FromArgb(0, $Ink.R, $Ink.G, $Ink.B)
+        $from = if ($i -eq 1 -or $i -eq 3) { $c2 } else { $c1 }
+        $to   = if ($i -eq 1 -or $i -eq 3) { $c1 } else { $c2 }
+        $br = New-Object System.Drawing.Drawing2D.LinearGradientBrush($e.r, $from, $to, $angle)
+        $g.FillRectangle($br, $e.r); $br.Dispose()
+    }
+}
+
 function Draw-Cabinet ($g, [int]$w, [int]$h, [bool]$expanded) {
     # Night behind it - unless we are testing a shaped window, in which case
     # the ground stays transparent and only the stone is painted.
@@ -951,7 +1031,19 @@ function Draw-EngravedLabel ($g, [string]$text, [single]$cx, [single]$y, [single
 Write-Host "Building the cabinet ..." -ForegroundColor DarkYellow
 
 function Draw-Face ($g) {
-    Draw-Cabinet $g ($W + 1) ($H + 1) $true
+    if ($Photo) {
+        # The photo is the whole background: no drawn stone, and no fretwork
+        # over it either - the moon, branches and bats are clip art by any other
+        # name and would sit on a photograph like stickers.
+        Draw-PhotoGround $g ($W + 1) ($H + 1) $Photo $PhotoCentre $PhotoNight
+    } else {
+        Draw-Cabinet $g ($W + 1) ($H + 1) $true
+    }
+    # No backing plate behind the control stack over a photograph. It was tried:
+    # it covers the carved inscription cleanly and looks more finished, but it
+    # turns the controls into a slab lying ON the photo instead of wells cut
+    # INTO the stone, and the inset reading is the whole point. The inscription
+    # showing between the panels is the stone, and that is correct.
     Draw-Panel   $g 34 $L.TitleY 362 $L.TitleH 7       # station name
     Draw-Panel   $g 34 ($L.RowY - 6) 362 34 6          # the filter strip
     Draw-Panel   $g 34 $L.ListY  362 $L.ListH   8      # the station list well
@@ -974,7 +1066,13 @@ Save-Canvas $c 'bg1.png'
 
 # Collapsed
 $c = New-Canvas ($W + 1) ($HC + 1)
-Draw-Cabinet $c.Graphics ($W + 1) ($HC + 1) $false
+if ($Photo) {
+    # 424 is the crop width the expanded face uses, so both states show the
+    # stone at the same magnification. 0.60 puts the band below the inscription.
+    Draw-PhotoGround $c.Graphics ($W + 1) ($HC + 1) $Photo $PhotoCentre $PhotoNight 424 0.60
+} else {
+    Draw-Cabinet $c.Graphics ($W + 1) ($HC + 1) $false
+}
 Draw-Panel   $c.Graphics 26 12 172 26 6
 Draw-DialWell $c.Graphics 204 12 130 26
 Seal-Edge $c $Night

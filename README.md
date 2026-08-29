@@ -2,8 +2,8 @@
 
 Two things for anyone still running RadioSure in 2026:
 
-1. **Radiation King** — four skins: three styled after the 1950s valve radio
-   from Fallout, and one upright one cut as a headstone.
+1. **Radiation King** — five skins: three styled after the 1950s valve radio
+   from Fallout, and two upright ones cut as a headstone.
 2. **A station database updater** — a PowerShell script that rebuilds RadioSure's
    station list from the live [Radio-Browser](https://www.radio-browser.info)
    directory. About 50,000 working stations, and it can run itself weekly.
@@ -67,6 +67,7 @@ on either build.
 | **Radiation King Cabinet** | 620×560 | Cream and wood tabletop set. Oval woven grille, engraved control labels, and a Minimize button the other two do not have. |
 | **Radiation King Deluxe** | 720×496 | Mahogany and brass. Gold sunburst grille, and the spectrum analyser lives inside a green magic-eye tube. |
 | **Hallows Eve** | 430×780 | The odd one out: a **vertical** player, cut as a weathered granite headstone. Generated entirely from `Build-HallowsEveSkin.ps1`. |
+| **Hallows Eve Photo** | 430×780 | The same layout over a photographic headstone instead of a drawn one. Same generator, run with `-Photo`. |
 
 Every skin includes both the expanded and the collapsed window state.
 
@@ -75,11 +76,19 @@ format allows and nothing else here uses, and the collapsed state is a single
 narrow lintel of the same stone. As with the other skins, some things in the
 artwork are left for you to find rather than listed here.
 
+The two Hallows Eve skins are the same layout over two different grounds. One
+draws its stone in code, the way everything else here is made. The other lays
+the controls over a photographic render, which is the only skin in this repo
+whose background is not drawn by a script — see the credits for where the image
+came from. Pick whichever you prefer; both are complete.
+
 ![Radiation King Cabinet](screenshot-cabinet.png)
 
 ![Radiation King Deluxe](screenshot-deluxe.png)
 
 ![Hallows Eve](screenshot-hallows-eve.png)
+
+![Hallows Eve Photo](screenshot-hallows-eve-photo.png)
 
 ## Installing a skin
 
@@ -120,6 +129,21 @@ assets. Each has a palette block at the top and a layout table below it; change
 either and re-run. Requires nothing but Windows PowerShell. The Cabinet and
 Deluxe skins are drawn the same way, from their own generators; those two
 scripts are not in the repo yet.
+
+The Hallows Eve generator also builds the photographic variant, from the same
+layout table, if you give it an image:
+
+```powershell
+.\Build-HallowsEveSkin.ps1 -SkinName "Hallows Eve Photo" `
+    -Photo ".\source\hallows-eve-headstone.png" -PhotoNight 0.28
+```
+
+`-PhotoCentre` slides the crop across the source, and `-PhotoNight` sets how far
+it is graded toward night — 0 leaves the photo untouched, 1 is black. The crop
+is always taken at the window's aspect ratio and never squashed to fit, and the
+collapsed strip is cropped at the same magnification as the expanded face so the
+two states show the same stone at the same scale. Point it at a photograph of
+your own and you get a different skin from the same code.
 
 While RadioSure is open it holds the skin PNGs, so close it before regenerating.
 **Press F5 in RadioSure to reload a skin without restarting** — invaluable when
@@ -219,9 +243,21 @@ connection. No installs, no modules, no dependencies.
 - **[JazzfanRS/Radiosure-station-database](https://github.com/JazzfanRS/Radiosure-station-database)**
   preserves the final official 2022 database and installer.
 - **Fallout**, **Vault-Tec** and the Radiation King are trademarks of **Bethesda
-  Softworks**. This skin is unofficial fan work, made with respect and no
-  affiliation. Every pixel is drawn from scratch in code — no game assets are
-  used or redistributed.
+  Softworks**. These skins are unofficial fan work, made with respect and no
+  affiliation. No game assets are used or redistributed.
+- **How the artwork is made.** Four of the five skins are drawn entirely in code
+  — every gradient, knob, grille and speck of grit is a `System.Drawing` call in
+  a PowerShell script, with no photographs, no clip art and no hand-painted
+  files. **Hallows Eve Photo** is the exception: its background is a photographic
+  render, and the source image ships in `Skins\source\` so the skin can be
+  rebuilt.
+- **The headstone photograph** in Hallows Eve Photo was generated with
+  **Nano Banana**, Google's image model, from text prompts written by the author.
+  It is not a photograph of a real grave, not stock imagery, and not anyone
+  else's work — the image was rendered to order for this skin, and the prompt
+  behind it is the author's own. The name and dates carved into it are invented.
+  Everything laid over that background — the plates, the wells, the keys, the
+  spectrum — is drawn in code like the rest.
 
 The skin artwork and the scripts are free to use, modify and share. A credit is
 appreciated but not required. If you make a nicer colourway, please post it —
