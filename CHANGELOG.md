@@ -57,8 +57,10 @@ trick, and the wallpaper still ships for anyone who wants it.
 
 ### Known, not yet fixed
 
-- The README points at `%LOCALAPPDATA%\RadioSure\Skins` for the install folder.
-  RadioSure is portable — it keeps `RadioSure.xml` beside the executable — so on
-  most installs that folder does not exist. The skins go in the `Skins` folder
-  **next to `RadioSure.exe`**. `Build-HallowsEveSkin.ps1` has the same assumption
-  in its default `-OutDir`; pass `-OutDir` explicitly.
+- `Build-HallowsEveSkin.ps1` still defaults `-OutDir` to
+  `%LOCALAPPDATA%\RadioSure\Skins\...`. RadioSure is portable — it keeps
+  `RadioSure.xml` beside the executable — so on most installs that folder does
+  not exist. Pass `-OutDir` explicitly, pointing at the `Skins` folder next to
+  `RadioSure.exe`. The README's install instructions were corrected in this
+  release; the script default has been left alone so it keeps working on the
+  machine it was written on.

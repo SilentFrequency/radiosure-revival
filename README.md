@@ -101,9 +101,16 @@ a different desktop, `-PhotoNight` is the dial.
 ## Installing a skin
 
 1. Copy the whole `<Name>.rsn` folder out of `Skins\` into RadioSure's own
-   `Skins` folder.
-   - Usually `%LOCALAPPDATA%\RadioSure\Skins`, next to `RadioSure.exe`.
+   `Skins` folder — the one **next to `RadioSure.exe`**.
+   - RadioSure is portable. It keeps `RadioSure.xml` beside the executable, not
+     in the registry and not under `AppData`. So if the player lives in
+     `D:\RadioSure\`, the skins go in `D:\RadioSure\Skins\`. On most installs
+     there is no `%LOCALAPPDATA%\RadioSure` folder at all — don't go looking for
+     one.
 2. Start RadioSure → **Options** → pick the skin by name.
+   - Use Options, not F5. F5 reloads the images, but the window's corner shaping
+     is only applied when a skin is *loaded*, so F5 leaves new artwork in the old
+     window shape.
 
 That's it. Nothing about how you use the player changes.
 
@@ -208,7 +215,7 @@ will quietly catch a moment when the player is closed.
 To register it (no admin rights needed — adjust the path):
 
 ```powershell
-$rs = "$env:LOCALAPPDATA\RadioSure"
+$rs = "D:\RadioSure"        # the folder RadioSure.exe is in
 $action = New-ScheduledTaskAction -Execute "powershell.exe" `
   -Argument "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$rs\Update-RadioSureStations.ps1`" -Scheduled" `
   -WorkingDirectory $rs
