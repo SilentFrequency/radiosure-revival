@@ -8,16 +8,16 @@
     <Frame>0</Frame>
     <x>0</x>
     <y>0</y>
-    <width>430</width>
-    <height>780</height>
+    <width>366</width>
+    <height>663</height>
     <Background>bg1.png</Background>
-    <Rounded>14</Rounded>
+    <Rounded>12</Rounded>
   </Window>
   <OnTop>
-    <x>292</x>
-    <y>20</y>
-    <width>26</width>
-    <height>26</height>
+    <x>248</x>
+    <y>17</y>
+    <width>22</width>
+    <height>22</height>
     <visible>1</visible>
     <TextColor>-1</TextColor>
     <Image>
@@ -32,10 +32,10 @@
     </AltImage>
   </OnTop>
   <Minimize>
-    <x>324</x>
-    <y>20</y>
-    <width>26</width>
-    <height>26</height>
+    <x>275</x>
+    <y>17</y>
+    <width>22</width>
+    <height>22</height>
     <visible>1</visible>
     <TextColor>-1</TextColor>
     <Image>
@@ -45,10 +45,10 @@
     </Image>
   </Minimize>
   <Expand>
-    <x>356</x>
-    <y>20</y>
-    <width>26</width>
-    <height>26</height>
+    <x>303</x>
+    <y>17</y>
+    <width>22</width>
+    <height>22</height>
     <visible>1</visible>
     <TextColor>-1</TextColor>
     <Image>
@@ -58,10 +58,10 @@
     </Image>
   </Expand>
   <Exit>
-    <x>388</x>
-    <y>20</y>
-    <width>26</width>
-    <height>26</height>
+    <x>330</x>
+    <y>17</y>
+    <width>22</width>
+    <height>22</height>
     <visible>1</visible>
     <TextColor>-1</TextColor>
     <Image>
@@ -71,10 +71,10 @@
     </Image>
   </Exit>
   <Play>
-    <x>36</x>
-    <y>706</y>
-    <width>44</width>
-    <height>44</height>
+    <x>31</x>
+    <y>600</y>
+    <width>37</width>
+    <height>37</height>
     <visible>1</visible>
     <TextColor>-1</TextColor>
     <Image>
@@ -89,10 +89,10 @@
     </AltImage>
   </Play>
   <Back>
-    <x>86</x>
-    <y>706</y>
-    <width>44</width>
-    <height>44</height>
+    <x>73</x>
+    <y>600</y>
+    <width>37</width>
+    <height>37</height>
     <visible>1</visible>
     <TextColor>-1</TextColor>
     <Image>
@@ -102,10 +102,10 @@
     </Image>
   </Back>
   <Next>
-    <x>136</x>
-    <y>706</y>
-    <width>44</width>
-    <height>44</height>
+    <x>116</x>
+    <y>600</y>
+    <width>37</width>
+    <height>37</height>
     <visible>1</visible>
     <TextColor>-1</TextColor>
     <Image>
@@ -115,10 +115,10 @@
     </Image>
   </Next>
   <Rec>
-    <x>186</x>
-    <y>706</y>
-    <width>44</width>
-    <height>44</height>
+    <x>158</x>
+    <y>600</y>
+    <width>37</width>
+    <height>37</height>
     <visible>1</visible>
     <TextColor>-1</TextColor>
     <Image>
@@ -133,10 +133,10 @@
     </AltImage>
   </Rec>
   <Favorites>
-    <x>254</x>
-    <y>706</y>
-    <width>44</width>
-    <height>44</height>
+    <x>216</x>
+    <y>600</y>
+    <width>37</width>
+    <height>37</height>
     <visible>1</visible>
     <TextColor>-1</TextColor>
     <Image>
@@ -146,10 +146,10 @@
     </Image>
   </Favorites>
   <Mute>
-    <x>304</x>
-    <y>706</y>
-    <width>44</width>
-    <height>44</height>
+    <x>258</x>
+    <y>600</y>
+    <width>37</width>
+    <height>37</height>
     <visible>1</visible>
     <TextColor>-1</TextColor>
     <Image>
@@ -164,10 +164,10 @@
     </AltImage>
   </Mute>
   <Options>
-    <x>354</x>
-    <y>706</y>
-    <width>44</width>
-    <height>44</height>
+    <x>301</x>
+    <y>600</y>
+    <width>37</width>
+    <height>37</height>
     <visible>1</visible>
     <TextColor>-1</TextColor>
     <Image>
@@ -177,14 +177,14 @@
     </Image>
   </Options>
   <Sources>
-    <x>44</x>
-    <y>228</y>
-    <width>105</width>
-    <height>21</height>
+    <x>37</x>
+    <y>194</y>
+    <width>89</width>
+    <height>18</height>
     <visible>1</visible>
     <TextColor>255,255,170,74</TextColor>
     <BkColor>0,0,0,0</BkColor>
-    <TextSize>8</TextSize>
+    <TextSize>7</TextSize>
     <TextAlign>0</TextAlign>
     <Image>
       <Normal>Sources.png</Normal>
@@ -193,14 +193,14 @@
     </Image>
   </Sources>
   <FilterLabel>
-    <x>150</x>
-    <y>229</y>
-    <width>19</width>
-    <height>19</height>
+    <x>128</x>
+    <y>195</y>
+    <width>16</width>
+    <height>16</height>
     <visible>1</visible>
     <TextColor>255,184,172,150</TextColor>
     <BkColor>0,0,0,0</BkColor>
-    <TextSize>9</TextSize>
+    <TextSize>8</TextSize>
     <TextAlign>-1</TextAlign>
     <Image>
       <Normal>FilterLabel.png</Normal>
@@ -209,90 +209,94 @@
     </Image>
   </FilterLabel>
   <Filter>
-    <x>172</x>
-    <y>229</y>
-    <width>104</width>
-    <height>19</height>
+    <x>146</x>
+    <y>195</y>
+    <width>88</width>
+    <height>16</height>
     <visible>1</visible>
     <TextColor>255,228,216,192</TextColor>
     <BkColor>-1</BkColor>
-    <TextSize>9</TextSize>
+    <TextSize>8</TextSize>
     <TextAlign>-1</TextAlign>
   </Filter>
   <FoundNumber>
-    <x>282</x>
-    <y>231</y>
-    <width>112</width>
-    <height>14</height>
+    <x>240</x>
+    <y>193</y>
+    <width>95</width>
+    <height>20</height>
     <visible>1</visible>
     <TextColor>255,255,170,74</TextColor>
     <BkColor>0,0,0,0</BkColor>
-    <TextSize>8</TextSize>
+    <!-- 8 was invisible at arm's length. 13 is the ceiling: the label RadioSure
+         writes here is "Stations found: NNNNN" and the filter strip gives this
+         box 112px, so anything larger truncates the count. More room would have
+         to come off the filter input beside it. -->
+    <TextSize>11</TextSize>
     <TextAlign>1</TextAlign>
-  <GlowColor>-1</GlowColor></FoundNumber>
+  </FoundNumber>
   <List>
-    <x>40</x>
-    <y>270</y>
-    <width>350</width>
-    <height>276</height>
+    <x>34</x>
+    <y>230</y>
+    <width>298</width>
+    <height>235</height>
     <visible>1</visible>
     <TextColor>255,255,170,74</TextColor>
     <BkColor>255,10,8,9</BkColor>
     <HighLightColor>255,86,44,14</HighLightColor>
     <HighLightTextColor>255,255,206,140</HighLightTextColor>
     <Transparent>0</Transparent>
-    <TextSize>9</TextSize>
+    <TextSize>8</TextSize>
   </List>
   <RotatedInfo>
-    <x>38</x>
-    <y>180</y>
-    <width>354</width>
-    <height>22</height>
+    <x>32</x>
+    <y>148</y>
+    <width>301</width>
+    <height>25</height>
     <visible>1</visible>
     <TextColor>255,255,170,74</TextColor>
     <GlowColor>0,0,0,0</GlowColor>
     <BkColor>0,0,0,0</BkColor>
-    <TextSize>14</TextSize>
+    <TextSize>17</TextSize>
     <!-- Centred. This control reveals each string with a short animation, so
          a screenshot taken mid-reveal looks like the text is being clipped -
-         it is not. TextSize 14 shows a 53-character song line in full at this
+         it is not. At TextSize 20 a long song line still shows in full at this
          width; it does not need a wider window. -->
     <TextAlign>0</TextAlign>
   </RotatedInfo>
   <Status>
-    <x>40</x>
-    <y>564</y>
-    <width>112</width>
-    <height>12</height>
-    <visible>1</visible>
-    <TextColor>255,184,172,150</TextColor>
-    <BkColor>0,0,0,0</BkColor>
-    <TextSize>8</TextSize>
-    <TextAlign>-1</TextAlign>
-  <GlowColor>-1</GlowColor></Status>
-  <BufferInfo>
-    <x>158</x>
-    <y>564</y>
-    <width>44</width>
-    <height>12</height>
-    <visible>1</visible>
-    <TextColor>255,184,172,150</TextColor>
-    <BkColor>0,0,0,0</BkColor>
-    <TextSize>8</TextSize>
-    <TextAlign>1</TextAlign>
-  <GlowColor>-1</GlowColor></BufferInfo>
-  <BufferIndicator>
-    <x>298</x>
-    <y>565</y>
-    <width>92</width>
+    <x>34</x>
+    <y>479</y>
+    <width>95</width>
     <height>10</height>
+    <visible>1</visible>
+    <TextColor>255,184,172,150</TextColor>
+    <BkColor>0,0,0,0</BkColor>
+    <TextSize>7</TextSize>
+    <TextAlign>-1</TextAlign>
+  </Status>
+  <BufferInfo>
+    <x>134</x>
+    <y>479</y>
+    <width>37</width>
+    <height>10</height>
+    <visible>1</visible>
+    <TextColor>255,184,172,150</TextColor>
+    <BkColor>0,0,0,0</BkColor>
+    <TextSize>7</TextSize>
+    <TextAlign>1</TextAlign>
+  </BufferInfo>
+  <BufferIndicator>
+    <x>253</x>
+    <y>480</y>
+    <width>78</width>
+    <height>9</height>
     <visible>1</visible>
   </BufferIndicator>
   <Spectrum>
-    <x>44</x>
-    <y>592</y>
-    <width>342</width>
-    <height>54</height>
+    <x>37</x>
+    <y>503</y>
+    <width>291</width>
+    <height>46</height>
     <visible>1</visible>
     <!-- The bar colours are BarColorTop/Bottom. There is no <BarColor>; give it
          one and RadioSure ignores it, fills in BarColorTop as -1, and paints
@@ -310,14 +314,14 @@
     <Frame>0</Frame>
   </Spectrum>
   <Volume>
-    <x>44</x>
-    <y>662</y>
-    <width>220</width>
-    <height>26</height>
+    <x>37</x>
+    <y>563</y>
+    <width>187</width>
+    <height>22</height>
     <visible>1</visible>
     <!-- Flat ImageThumb/ImageChannel tags, not a nested <Image> block - the
          nested form is silently ignored for this control. -->
-    <ThumbSize>22</ThumbSize>
+    <ThumbSize>19</ThumbSize>
     <ImageThumb>VolumeThumb.png</ImageThumb>
     <ImageThumbHot>VolumeThumbHot.png</ImageThumbHot>
     <ImageChannel>VolumeChannel.png</ImageChannel>
@@ -326,4 +330,4 @@
     <Name>Claude - Hallows Eve Photo, a tombstone cabinet</Name>
     <URL>https://github.com/SilentFrequency/radiosure-revival</URL>
   </Author>
-<SongTitle><BkColor>-1</BkColor><TextColor>-1</TextColor><TextSize>13</TextSize><TextAlign>-1</TextAlign><GlowColor>-1</GlowColor><x>0</x><y>0</y><width>0</width><height>0</height><visible>1</visible></SongTitle></XMLConfigSettings>
+</XMLConfigSettings>

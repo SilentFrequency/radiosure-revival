@@ -29,7 +29,20 @@ param(
     # Where to take the portrait crop from, as a fraction of the photo width
     [single] $PhotoCentre = 0.5,
     # How hard to push it toward night. 0 = untouched, 1 = black.
-    [single] $PhotoNight = 0.42
+    [single] $PhotoNight = 0.42,
+
+    # Final size as a fraction of the authored 430x780. The cabinet is drawn at
+    # full size and resampled once at the end, so none of the layout numbers
+    # below need to know about it.
+    #
+    # Why this is not 1.0: 780 tall is 1170 physical pixels on a display at 150%
+    # scaling, which overhangs a 1080-high screen - RadioSure does not resize
+    # itself, the bottom simply falls off. 0.85 gives 366x663 (994 physical),
+    # clearing the taskbar. Set 1.0 on a taller screen.
+    # [double], not [single]: as float32 0.85 stores slightly ABOVE 0.85, which
+    # flips any value landing exactly on a .5 midpoint. Rounding is pinned to
+    # AwayFromZero below for the same reason - so a rebuild is reproducible.
+    [double] $Fit = 0.85
 )
 
 $ErrorActionPreference = 'Stop'
@@ -1098,7 +1111,7 @@ function Build-SkinXml ([bool]$collapsed) {
         # Two rows. The spectrum stays a small well rather than running the
         # width of the strip - collapsed, it should not be a ticker.
         $titleY = 18; $rowY = 52; $keySize = 36; $wbSize = 16
-        $titleX = 32; $titleW = 160; $titleSize = 12
+        $titleX = 32; $titleW = 160; $titleSize = 12; $titleH = 22
         $specX = 210; $specY = 16; $specW = 118; $specH = 20
         $volX = 310; $volY = 58; $volW = 104
         $winBtnY = 17
@@ -1106,8 +1119,10 @@ function Build-SkinXml ([bool]$collapsed) {
         $height = $H; $bg = 'bg1.png'
         $listVis = 1; $filterVis = 1; $foundVis = 1; $srcVis = 1
         $statusVis = 1; $bufVis = 1
-        $titleY = $L.TitleY + 8; $rowY = $L.KeyY; $keySize = $L.KeySize; $wbSize = 26
-        $titleX = 38; $titleW = 354; $titleSize = 14
+        $titleY = $L.TitleY + 2; $rowY = $L.KeyY; $keySize = $L.KeySize; $wbSize = 26
+        # The now-playing line is the one piece of text read from across the room,
+        # so it gets the bar's full height rather than sitting small inside it.
+        $titleX = 38; $titleW = 354; $titleSize = 20; $titleH = 29
         $specX = 44; $specY = $L.DialY + 12; $specW = 342; $specH = ($L.DialH - 20)
         $volX = 44; $volY = $L.VolY; $volW = 220
         $winBtnY = 20
@@ -1238,13 +1253,17 @@ $keys
   </Filter>
   <FoundNumber>
     <x>282</x>
-    <y>$($L.RowY + 3)</y>
+    <y>$($L.RowY - 1)</y>
     <width>112</width>
-    <height>14</height>
+    <height>24</height>
     <visible>$foundVis</visible>
     <TextColor>$amber</TextColor>
     <BkColor>$clear</BkColor>
-    <TextSize>8</TextSize>
+    <!-- 8 was invisible at arm's length. 13 is the ceiling: the label RadioSure
+         writes here is "Stations found: NNNNN" and the filter strip gives this
+         box 112px, so anything larger truncates the count. More room would have
+         to come off the filter input beside it. -->
+    <TextSize>13</TextSize>
     <TextAlign>1</TextAlign>
   </FoundNumber>
   <List>
@@ -1264,7 +1283,7 @@ $keys
     <x>$titleX</x>
     <y>$titleY</y>
     <width>$titleW</width>
-    <height>22</height>
+    <height>$titleH</height>
     <visible>1</visible>
     <TextColor>$amber</TextColor>
     <GlowColor>$clear</GlowColor>
@@ -1272,7 +1291,7 @@ $keys
     <TextSize>$titleSize</TextSize>
     <!-- Centred. This control reveals each string with a short animation, so
          a screenshot taken mid-reveal looks like the text is being clipped -
-         it is not. TextSize 14 shows a 53-character song line in full at this
+         it is not. At TextSize 20 a long song line still shows in full at this
          width; it does not need a wider window. -->
     <TextAlign>0</TextAlign>
   </RotatedInfo>
@@ -1351,6 +1370,51 @@ $keys
 $enc = New-Object System.Text.UTF8Encoding($false)
 [System.IO.File]::WriteAllText((Join-Path $OutDir 'skin.rsn'),  (Build-SkinXml $false), $enc)
 [System.IO.File]::WriteAllText((Join-Path $OutDir 'skin2.rsn'), (Build-SkinXml $true),  $enc)
+
+# --- Fit pass -----------------------------------------------------------------
+# Everything above is authored at 430x780. Resample the two backgrounds and scale
+# every measurement in the XML, so the skin can target a shorter screen without a
+# single layout number changing. Button art is deliberately left alone: RadioSure
+# scales button images to their element rect, so the 256x256 sources stay sharp.
+if ($Fit -ne 1.0) {
+    foreach ($f in 'bg1.png', 'bg2.png') {
+        $bp = Join-Path $OutDir $f
+        if (-not (Test-Path $bp)) { continue }
+        $src = [System.Drawing.Image]::FromFile($bp)
+        $nw = [int][Math]::Round($src.Width * $Fit, [MidpointRounding]::AwayFromZero)
+        $nh = [int][Math]::Round($src.Height * $Fit, [MidpointRounding]::AwayFromZero)
+        $dst = New-Object System.Drawing.Bitmap $nw, $nh
+        $gg = [System.Drawing.Graphics]::FromImage($dst)
+        $gg.InterpolationMode = 'HighQualityBicubic'; $gg.PixelOffsetMode = 'HighQuality'
+        $gg.DrawImage($src, 0, 0, $nw, $nh)
+        $gg.Dispose(); $src.Dispose()
+        $tmp = "$bp.tmp"
+        $dst.Save($tmp, [System.Drawing.Imaging.ImageFormat]::Png); $dst.Dispose()
+        Move-Item $tmp $bp -Force
+    }
+    # Bars is a count, not a size; TextAlign/Frame/GlassLevel are not measurements.
+    $tags = 'x', 'y', 'width', 'height', 'Rounded', 'TextSize', 'ThumbSize'
+    foreach ($f in 'skin.rsn', 'skin2.rsn') {
+        $xp = Join-Path $OutDir $f
+        $t = [System.IO.File]::ReadAllText($xp)
+        foreach ($tag in $tags) {
+            $rx = [regex]"<$tag>(-?\d+)</$tag>"
+            $ms = @($rx.Matches($t))
+            # reverse, so each splice leaves earlier indices valid
+            for ($i = $ms.Count - 1; $i -ge 0; $i--) {
+                $m = $ms[$i]; $v = [int]$m.Groups[1].Value
+                if ($v -eq 0) { continue }
+                $sv = [int][Math]::Round($v * $Fit, [MidpointRounding]::AwayFromZero)
+                if ($tag -eq 'TextSize' -and $sv -lt 7) { $sv = 7 }   # floor: below this, labels stop reading
+                $t = $t.Remove($m.Index, $m.Length).Insert($m.Index, "<$tag>$sv</$tag>")
+            }
+        }
+        [System.IO.File]::WriteAllText($xp, $t, $enc)
+    }
+    Write-Host ("Fitted to {0:P0} - window is now {1}x{2}" -f $Fit,
+        [int][Math]::Round($W * $Fit, [MidpointRounding]::AwayFromZero),
+        [int][Math]::Round($H * $Fit, [MidpointRounding]::AwayFromZero)) -ForegroundColor Cyan
+}
 
 $n = (Get-ChildItem $OutDir -File).Count
 Write-Host "Built '$SkinName' - $n files in $OutDir" -ForegroundColor Green
