@@ -16,7 +16,17 @@
 
 [CmdletBinding()]
 param(
-    [string] $OutDir   = "$env:LOCALAPPDATA\RadioSure\Skins\Hallows Eve.rsn",
+    # Where to write the finished skin. Left empty, it writes "<SkinName>.rsn"
+    # beside this script - which is exactly where the built skins live in this
+    # repo, so a rebuild refreshes the published copy and nothing else.
+    #
+    # It used to default to %LOCALAPPDATA%\RadioSure\Skins, which is wrong on
+    # most machines: RadioSure is portable and keeps its settings next to the
+    # executable, so that folder usually does not exist. Rather than guess at
+    # anyone's install, it now writes locally and tells you where to copy it.
+    # To build straight into the player, pass the path yourself:
+    #   .\Build-HallowsEveSkin.ps1 -OutDir "D:\RadioSure\Skins\Hallows Eve.rsn"
+    [string] $OutDir   = '',
     [string] $SkinName = 'Hallows Eve',
     # Leave everything outside the stone at alpha 0, to find out whether
     # RadioSure honours per-pixel alpha or only clips to a rounded rectangle.
@@ -48,6 +58,7 @@ param(
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
 
+if (-not $OutDir) { $OutDir = Join-Path $PSScriptRoot "$SkinName.rsn" }
 if (Test-Path $OutDir) { Remove-Item $OutDir -Recurse -Force }
 New-Item -ItemType Directory -Path $OutDir -Force | Out-Null
 
@@ -1418,3 +1429,5 @@ if ($Fit -ne 1.0) {
 
 $n = (Get-ChildItem $OutDir -File).Count
 Write-Host "Built '$SkinName' - $n files in $OutDir" -ForegroundColor Green
+Write-Host "Install it by copying that folder into the Skins folder next to RadioSure.exe," -ForegroundColor DarkGray
+Write-Host "then: RadioSure -> Options -> Skins -> $SkinName  (Options, not F5)." -ForegroundColor DarkGray

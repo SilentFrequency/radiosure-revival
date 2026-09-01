@@ -55,12 +55,17 @@ breaks that alignment — the skin no longer lines up with the wallpaper behind 
 That is a deliberate trade: fitting the screen and being usable beats the overlay
 trick, and the wallpaper still ships for anyone who wants it.
 
-### Known, not yet fixed
+### Also fixed: the script wrote to a folder that usually doesn't exist
 
-- `Build-HallowsEveSkin.ps1` still defaults `-OutDir` to
-  `%LOCALAPPDATA%\RadioSure\Skins\...`. RadioSure is portable — it keeps
-  `RadioSure.xml` beside the executable — so on most installs that folder does
-  not exist. Pass `-OutDir` explicitly, pointing at the `Skins` folder next to
-  `RadioSure.exe`. The README's install instructions were corrected in this
-  release; the script default has been left alone so it keeps working on the
-  machine it was written on.
+`Build-HallowsEveSkin.ps1` defaulted `-OutDir` to `%LOCALAPPDATA%\RadioSure\Skins`.
+RadioSure is portable and keeps its settings next to the executable, so on most
+machines that folder is not there.
+
+With no `-OutDir` it now writes `<SkinName>.rsn` **beside the script** — which is
+where the built skins live in this repo, so a rebuild simply refreshes the
+published copy — and prints where to copy it. To build straight into the player,
+pass the path:
+
+```powershell
+.\Build-HallowsEveSkin.ps1 -OutDir "D:\RadioSure\Skins\Hallows Eve.rsn"
+```
