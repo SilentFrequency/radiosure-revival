@@ -66,29 +66,15 @@ on either build.
 | **Radiation King** | 490×346 | Stock control layout — same buttons in the same places, restyled. Generated entirely from `Build-RadiationKingSkin.ps1`. |
 | **Radiation King Cabinet** | 620×560 | Cream and wood tabletop set. Oval woven grille, engraved control labels, and a Minimize button the other two do not have. |
 | **Radiation King Deluxe** | 720×496 | Mahogany and brass. Gold sunburst grille, and the spectrum analyser lives inside a green magic-eye tube. |
-| **Hallows Eve** | 430×780 | The odd one out: a **vertical** player, cut as a weathered granite headstone. Generated entirely from `Build-HallowsEveSkin.ps1`. |
-| **Hallows Eve Photo** | 430×780 | The same layout over a photographic headstone instead of a drawn one. Same generator, run with `-Photo`. |
+| **Hallows Eve** | 366×663 | The odd one out: a **vertical** player, cut as a weathered granite headstone. Generated entirely from `Build-HallowsEveSkin.ps1`. |
+| **Hallows Eve Photo** | 366×663 | The same layout over a photographic headstone instead of a drawn one. Same generator, run with `-Photo`. |
 
-Every skin includes both the expanded and the collapsed window state.
+Every skin includes both the expanded and the collapsed window state. As with
+the other skins, some things in the artwork are left for you to find rather
+than listed here.
 
-Hallows Eve is worth a word. It is upright rather than landscape, which the
-format allows and nothing else here uses, and the collapsed state is a single
-narrow lintel of the same stone. As with the other skins, some things in the
-artwork are left for you to find rather than listed here.
-
-The two Hallows Eve skins are the same layout over two different grounds. One
-draws its stone in code, the way everything else here is made. The other lays
-the controls over a photographic render, which is the only skin in this repo
-whose background is not drawn by a script — see the credits for where the image
-came from. Pick whichever you prefer; both are complete.
-
-**A matching wallpaper ships with the photo skin**, in `Skins\source\`. Set it
-as your desktop and the graveyard in the window carries on into the graveyard
-behind it, which is the closest this format will ever get to a shaped window —
-a skin can never be cut to the outline of its artwork (see the format notes), so
-the next best thing is a ground that does not want hiding. The screenshot below
-is the pair in use. The skin is graded to sit against that wallpaper; if you use
-a different desktop, `-PhotoNight` is the dial.
+The photo skin's source image doubles as a matching wallpaper:
+`Skins\source\hallows-eve-headstone.png`.
 
 ![Radiation King Cabinet](screenshot-cabinet.png)
 
@@ -266,9 +252,8 @@ connection. No installs, no modules, no dependencies.
   files. **Hallows Eve Photo** is the exception: its background is a photographic
   render, and the source image ships in `Skins\source\` so the skin can be
   rebuilt.
-- **The headstone photograph** in Hallows Eve Photo, and the matching wallpaper
-  beside it, were both generated with **Nano Banana**, Google's image model, from
-  text prompts written by the author.
+- **The headstone photograph** in Hallows Eve Photo was generated with
+  **Nano Banana**, Google's image model, from text prompts written by the author.
   It is not a photograph of a real grave, not stock imagery, and not anyone
   else's work — the image was rendered to order for this skin, and the prompt
   behind it is the author's own. The name and dates carved into it are invented.

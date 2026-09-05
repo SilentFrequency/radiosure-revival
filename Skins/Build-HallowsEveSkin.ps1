@@ -1399,6 +1399,24 @@ if ($Fit -ne 1.0) {
         $gg.InterpolationMode = 'HighQualityBicubic'; $gg.PixelOffsetMode = 'HighQuality'
         $gg.DrawImage($src, 0, 0, $nw, $nh)
         $gg.Dispose(); $src.Dispose()
+        # Re-seal the outer ring. Resampling is exactly the operation that
+        # softens an edge: the bicubic filter has nothing beyond the border to
+        # sample, so the outermost row and column come back part-transparent,
+        # and RadioSure composites that against its light window background as
+        # the thin pale line this skin already had fixed once. Keep the colour
+        # the artwork drew; rewrite only the alpha.
+        for ($ex = 0; $ex -lt $nw; $ex++) {
+            foreach ($ey in 0, ($nh - 1)) {
+                $c = $dst.GetPixel($ex, $ey)
+                if ($c.A -lt 255) { $dst.SetPixel($ex, $ey, [System.Drawing.Color]::FromArgb(255, $c.R, $c.G, $c.B)) }
+            }
+        }
+        for ($ey = 0; $ey -lt $nh; $ey++) {
+            foreach ($ex in 0, ($nw - 1)) {
+                $c = $dst.GetPixel($ex, $ey)
+                if ($c.A -lt 255) { $dst.SetPixel($ex, $ey, [System.Drawing.Color]::FromArgb(255, $c.R, $c.G, $c.B)) }
+            }
+        }
         $tmp = "$bp.tmp"
         $dst.Save($tmp, [System.Drawing.Imaging.ImageFormat]::Png); $dst.Dispose()
         Move-Item $tmp $bp -Force
