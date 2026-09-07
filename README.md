@@ -68,6 +68,7 @@ on either build.
 | **Radiation King Deluxe** | 720×496 | Mahogany and brass. Gold sunburst grille, and the spectrum analyser lives inside a green magic-eye tube. |
 | **Hallows Eve** | 366×663 | The odd one out: a **vertical** player, cut as a weathered granite headstone. Generated entirely from `Build-HallowsEveSkin.ps1`. |
 | **Hallows Eve Photo** | 366×663 | The same layout over a photographic headstone instead of a drawn one. Same generator, run with `-Photo`. |
+| **High Contrast** | 600×360 | Not illustration — an accessible skin. Yellow on black at 19.6:1, hard edges, and controls that inverse completely on hover instead of glowing. Deliberately the smallest skin here. |
 | **Gramophone** | 1040×567 | A wizard's study. The cabinet's own carvings are the controls — the jewels, the cabochons and the runes are the buttons, and the spectrum drifts in the stardust above the record. |
 
 Every skin includes both the expanded and the collapsed window state. As with
@@ -86,6 +87,49 @@ The photo skin's source image doubles as a matching wallpaper:
 ![Hallows Eve Photo](screenshot-hallows-eve-photo.png)
 
 ![Gramophone](screenshot-gramophone.png)
+
+## Accessibility
+
+**High Contrast** is the odd one out in this repo. The other six are
+illustration; this one has a job, and every choice in it is a constraint rather
+than a preference.
+
+- **Yellow on black, measured at 19.6:1.** WCAG asks 4.5:1 for AA and 7:1 for
+  AAA on normal text. The list is white on black at 21:1, and selection inverts
+  to black on yellow. Yellow-on-black is also the scheme low-vision users
+  already know from Windows' own High Contrast Black theme.
+- **Hard edges, no antialiasing on rules.** Antialiasing paints a 50% fringe on
+  both sides of a border — a 3px yellow rule measured 128,128,0 at its edges,
+  which drops that edge to 5.0:1. Every border here is drawn with smoothing off
+  so it stays at full contrast.
+- **State changes by inversion, not glow.** Hovering a button swaps foreground
+  and background completely. A subtle highlight is invisible to the people this
+  is for.
+- **It is the smallest skin here on purpose.** RadioSure is not DPI-aware, so
+  Windows hands it a virtual screen of resolution ÷ scaling — and high scaling,
+  which is what this audience runs, *shrinks* that screen. At 1080p and 250%
+  the usable height is only 384px. At 600×360 this fits; a larger skin would
+  fail for the people who most need it.
+
+### Two things a skin cannot do
+
+**It cannot enlarge the station list.** Only five elements accept `TextSize` —
+the now-playing line, status, buffer, found-count and song title. `List` and the
+filter box use the Windows font, so the skin controls their colour but not their
+size. Larger list text comes from Windows' own display scaling.
+
+**It cannot help with voice control.** Skins draw pixels; they do not create
+accessible objects. RadioSure's buttons are custom-drawn images with nothing
+behind them for UI Automation to find, which is why Windows Voice Access will
+not locate them by name. The working route is **global hotkeys**, which
+RadioSure supports and enables by default — Voice Access custom commands can
+send keystrokes, which bypasses the interface entirely.
+
+For screen-reader users there is an actively maintained NVDA add-on for
+RadioSure at
+[paulber19/radioSureAccessEnhancementNVDAAddon](https://github.com/paulber19/radioSureAccessEnhancementNVDAAddon).
+It is unrelated to this repo and solves a different problem — speaking the
+interface, rather than making it visible.
 
 ## Installing a skin
 
