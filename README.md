@@ -234,6 +234,26 @@ throttling, it aborts and leaves your existing list alone. Radio-Browser answers
 bulk requests with a `502` or `503` when hit repeatedly — the script tries the
 other mirrors, then backs off and retries, so just run it again later.
 
+### Read the log before you theorise
+
+Every run appends to **`update-log.txt`**, next to `RadioSure.exe`. Timestamps,
+station counts at each stage, and the exact text of any error — including the
+runs that failed and retried, which are the ones worth having.
+
+```
+2026-08-02 09:57:02  WARN: Mirror failed: The remote server returned an error: (503) Server Unavailable.
+2026-08-02 09:57:02  WARN: Waiting 15 seconds before retrying (the server throttles bulk downloads) ...
+2026-08-02 10:00:46  Done. 50103 stations installed. Start RadioSure.
+```
+
+This is not decoration. The sentence above about `502` and `503` was wrong for
+months — it named only the `503` — and the log is what corrected it: seven runs,
+three of each, evenly split. If something looks off, read the log before
+believing anyone's memory of it, including your own.
+
+Unattended runs write there too, so a task that fired at 9am while you were
+asleep still leaves you the whole story.
+
 ---
 
 ## Requirements
