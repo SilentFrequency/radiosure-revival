@@ -227,6 +227,7 @@
     <visible>0</visible>
     <TextColor>255,255,170,74</TextColor>
     <BkColor>0,0,0,0</BkColor>
+    <GlowColor>0,0,0,0</GlowColor>
     <!-- 8 was invisible at arm's length. 13 is the ceiling: the label RadioSure
          writes here is "Stations found: NNNNN" and the filter strip gives this
          box 112px, so anything larger truncates the count. More room would have
@@ -265,24 +266,26 @@
   </RotatedInfo>
   <Status>
     <x>34</x>
-    <y>479</y>
-    <width>95</width>
-    <height>10</height>
+    <y>473</y>
+    <width>119</width>
+    <height>22</height>
     <visible>0</visible>
-    <TextColor>255,184,172,150</TextColor>
+    <TextColor>255,255,170,74</TextColor>
     <BkColor>0,0,0,0</BkColor>
-    <TextSize>7</TextSize>
+    <GlowColor>0,0,0,0</GlowColor>
+    <TextSize>11</TextSize>
     <TextAlign>-1</TextAlign>
   </Status>
   <BufferInfo>
-    <x>134</x>
-    <y>479</y>
-    <width>37</width>
-    <height>10</height>
+    <x>158</x>
+    <y>473</y>
+    <width>88</width>
+    <height>22</height>
     <visible>0</visible>
-    <TextColor>255,184,172,150</TextColor>
+    <TextColor>255,255,170,74</TextColor>
     <BkColor>0,0,0,0</BkColor>
-    <TextSize>7</TextSize>
+    <GlowColor>0,0,0,0</GlowColor>
+    <TextSize>11</TextSize>
     <TextAlign>1</TextAlign>
   </BufferInfo>
   <BufferIndicator>

@@ -227,6 +227,7 @@
     <visible>1</visible>
     <TextColor>255,255,170,74</TextColor>
     <BkColor>0,0,0,0</BkColor>
+    <GlowColor>0,0,0,0</GlowColor>
     <!-- 8 was invisible at arm's length. 13 is the ceiling: the label RadioSure
          writes here is "Stations found: NNNNN" and the filter strip gives this
          box 112px, so anything larger truncates the count. More room would have
@@ -256,7 +257,7 @@
     <TextColor>255,255,170,74</TextColor>
     <GlowColor>0,0,0,0</GlowColor>
     <BkColor>0,0,0,0</BkColor>
-    <TextSize>17</TextSize>
+    <TextSize>16</TextSize>
     <!-- Centred. This control reveals each string with a short animation, so
          a screenshot taken mid-reveal looks like the text is being clipped -
          it is not. At TextSize 20 a long song line still shows in full at this
@@ -265,24 +266,26 @@
   </RotatedInfo>
   <Status>
     <x>34</x>
-    <y>479</y>
-    <width>95</width>
-    <height>10</height>
+    <y>473</y>
+    <width>119</width>
+    <height>22</height>
     <visible>1</visible>
-    <TextColor>255,184,172,150</TextColor>
+    <TextColor>255,255,170,74</TextColor>
     <BkColor>0,0,0,0</BkColor>
-    <TextSize>7</TextSize>
+    <GlowColor>0,0,0,0</GlowColor>
+    <TextSize>11</TextSize>
     <TextAlign>-1</TextAlign>
   </Status>
   <BufferInfo>
-    <x>134</x>
-    <y>479</y>
-    <width>37</width>
-    <height>10</height>
+    <x>158</x>
+    <y>473</y>
+    <width>88</width>
+    <height>22</height>
     <visible>1</visible>
-    <TextColor>255,184,172,150</TextColor>
+    <TextColor>255,255,170,74</TextColor>
     <BkColor>0,0,0,0</BkColor>
-    <TextSize>7</TextSize>
+    <GlowColor>0,0,0,0</GlowColor>
+    <TextSize>11</TextSize>
     <TextAlign>1</TextAlign>
   </BufferInfo>
   <BufferIndicator>
@@ -330,4 +333,4 @@
     <Name>Claude - Hallows Eve Photo, a tombstone cabinet</Name>
     <URL>https://github.com/SilentFrequency/radiosure-revival</URL>
   </Author>
-</XMLConfigSettings>
+<SongTitle><BkColor>-1</BkColor><TextColor>-1</TextColor><TextSize>13</TextSize><TextAlign>-1</TextAlign><GlowColor>-1</GlowColor><x>0</x><y>0</y><width>0</width><height>0</height><visible>1</visible></SongTitle></XMLConfigSettings>

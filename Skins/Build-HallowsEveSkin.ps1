@@ -1133,7 +1133,7 @@ function Build-SkinXml ([bool]$collapsed) {
         $titleY = $L.TitleY + 2; $rowY = $L.KeyY; $keySize = $L.KeySize; $wbSize = 26
         # The now-playing line is the one piece of text read from across the room,
         # so it gets the bar's full height rather than sitting small inside it.
-        $titleX = 38; $titleW = 354; $titleSize = 20; $titleH = 29
+        $titleX = 38; $titleW = 354; $titleSize = 19; $titleH = 29
         $specX = 44; $specY = $L.DialY + 12; $specW = 342; $specH = ($L.DialH - 20)
         $volX = 44; $volY = $L.VolY; $volW = 220
         $winBtnY = 20
@@ -1270,6 +1270,7 @@ $keys
     <visible>$foundVis</visible>
     <TextColor>$amber</TextColor>
     <BkColor>$clear</BkColor>
+    <GlowColor>$clear</GlowColor>
     <!-- 8 was invisible at arm's length. 13 is the ceiling: the label RadioSure
          writes here is "Stations found: NNNNN" and the filter strip gives this
          box 112px, so anything larger truncates the count. More room would have
@@ -1308,24 +1309,26 @@ $keys
   </RotatedInfo>
   <Status>
     <x>40</x>
-    <y>$($L.MetaY)</y>
-    <width>112</width>
-    <height>12</height>
+    <y>$($L.MetaY - 8)</y>
+    <width>140</width>
+    <height>26</height>
     <visible>$statusVis</visible>
-    <TextColor>$boneDim</TextColor>
+    <TextColor>$amber</TextColor>
     <BkColor>$clear</BkColor>
-    <TextSize>8</TextSize>
+    <GlowColor>$clear</GlowColor>
+    <TextSize>13</TextSize>
     <TextAlign>-1</TextAlign>
   </Status>
   <BufferInfo>
-    <x>158</x>
-    <y>$($L.MetaY)</y>
-    <width>44</width>
-    <height>12</height>
+    <x>186</x>
+    <y>$($L.MetaY - 8)</y>
+    <width>104</width>
+    <height>26</height>
     <visible>$bufVis</visible>
-    <TextColor>$boneDim</TextColor>
+    <TextColor>$amber</TextColor>
     <BkColor>$clear</BkColor>
-    <TextSize>8</TextSize>
+    <GlowColor>$clear</GlowColor>
+    <TextSize>13</TextSize>
     <TextAlign>1</TextAlign>
   </BufferInfo>
   <BufferIndicator>
@@ -1381,6 +1384,11 @@ $keys
 $enc = New-Object System.Text.UTF8Encoding($false)
 [System.IO.File]::WriteAllText((Join-Path $OutDir 'skin.rsn'),  (Build-SkinXml $false), $enc)
 [System.IO.File]::WriteAllText((Join-Path $OutDir 'skin2.rsn'), (Build-SkinXml $true),  $enc)
+
+# GlowColor must be written explicitly on every text element. Leaving it out
+# is not neutral: RadioSure fills the missing field with -1 and SAVES THE FILE
+# BACK, and -1 paints a grey halo box behind the text. Both Hallows Eve skins
+# shipped for a week with murky readouts because of exactly that.
 
 # --- Fit pass -----------------------------------------------------------------
 # Everything above is authored at 430x780. Resample the two backgrounds and scale
