@@ -171,8 +171,10 @@ never written to.
 
 That is the run going well. What the picture cannot show is the part that
 matters most on a bad day: Radio-Browser throttles bulk requests, and when it
-answers with a `503` the script backs off and retries rather than falling over
-or — worse — installing a half-downloaded list.
+answers with a `502` or `503` the script tries the next mirror, then backs off
+15, 45 and 90 seconds before trying again, rather than falling over or — worse —
+installing a half-downloaded list. It does not match on a status code at all: any
+failed mirror, timeout included, takes the same path.
 
 ### What it does to the list
 
@@ -229,8 +231,8 @@ Register-ScheduledTask -TaskName "RadioSure Station Update" `
 
 It is deliberately cautious: if the download is short, or Radio-Browser is
 throttling, it aborts and leaves your existing list alone. Radio-Browser answers
-bulk requests with a `503` when hit repeatedly — the script backs off and
-retries, so just run it again later.
+bulk requests with a `502` or `503` when hit repeatedly — the script tries the
+other mirrors, then backs off and retries, so just run it again later.
 
 ---
 

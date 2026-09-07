@@ -54,8 +54,10 @@ $Mirrors = @(
 )
 $UserAgent = 'RadioSureStationUpdater/1.0'
 
-# The server rate-limits repeated bulk downloads with a 503, so back off and
-# retry rather than failing the whole run.
+# The server rate-limits repeated bulk downloads - observed as both 502 Bad
+# Gateway and 503 Server Unavailable - so try the other mirrors, then back off
+# and retry rather than failing the whole run. Nothing below matches on a status
+# code: any mirror failure, timeout included, takes this path.
 $RetryWaits = @(15, 45, 90)
 
 if (-not $RadioSureDir) { $RadioSureDir = (Get-Location).Path }
