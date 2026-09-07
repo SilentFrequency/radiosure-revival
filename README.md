@@ -111,6 +111,28 @@ than a preference.
   the usable height is only 384px. At 600×360 this fits; a larger skin would
   fail for the people who most need it.
 
+### If it looks harsh, it is working
+
+**This skin is uncomfortable to look at if you have typical vision, and that is
+not a fault.** 19.6:1 is well past what anyone needs for casual reading, and it
+is meant to be — the point is a screen that stays legible when contrast
+sensitivity has dropped. Reaching that means going past what is comfortable for
+someone whose sight is unimpaired. Windows' own High Contrast Black theme feels
+exactly the same way to people who do not need it.
+
+So please do not soften it on aesthetic grounds. Judge it on whether every
+element is unambiguous, not on whether it is pleasant.
+
+If you *do* need it but yellow is the wrong colour for you — some people read
+cyan or plain white more comfortably, and light sensitivity varies a great deal
+— change the palette block at the top of `Build-HighContrastSkin.ps1` and re-run
+it. That is the intended escape hatch: adjustable by the person who needs it,
+rather than toned down by someone who does not.
+
+One rule if you change a text size while you are in there: keep the box at least
+1.35 times the point size. A box shorter than its type does not clip the text,
+it renders nothing at all.
+
 ### Two things a skin cannot do
 
 **It cannot enlarge the station list.** Only five elements accept `TextSize` —
