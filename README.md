@@ -2,8 +2,8 @@
 
 Two things for anyone still running RadioSure in 2026:
 
-1. **Radiation King** — five skins: three styled after the 1950s valve radio
-   from Fallout, and two upright ones cut as a headstone.
+1. **Six skins** — three styled after the 1950s valve radio from Fallout, two
+   upright ones cut as a headstone, and a wizard's gramophone.
 2. **A station database updater** — a PowerShell script that rebuilds RadioSure's
    station list from the live [Radio-Browser](https://www.radio-browser.info)
    directory. About 50,000 working stations, and it can run itself weekly.
@@ -68,6 +68,7 @@ on either build.
 | **Radiation King Deluxe** | 720×496 | Mahogany and brass. Gold sunburst grille, and the spectrum analyser lives inside a green magic-eye tube. |
 | **Hallows Eve** | 366×663 | The odd one out: a **vertical** player, cut as a weathered granite headstone. Generated entirely from `Build-HallowsEveSkin.ps1`. |
 | **Hallows Eve Photo** | 366×663 | The same layout over a photographic headstone instead of a drawn one. Same generator, run with `-Photo`. |
+| **Gramophone** | 1040×567 | A wizard's study. The cabinet's own carvings are the controls — the jewels, the cabochons and the runes are the buttons, and the spectrum drifts in the stardust above the record. |
 
 Every skin includes both the expanded and the collapsed window state. As with
 the other skins, some things in the artwork are left for you to find rather
@@ -83,6 +84,8 @@ The photo skin's source image doubles as a matching wallpaper:
 ![Hallows Eve](screenshot-hallows-eve.png)
 
 ![Hallows Eve Photo](screenshot-hallows-eve-photo.png)
+
+![Gramophone](screenshot-gramophone.png)
 
 ## Installing a skin
 
@@ -159,10 +162,17 @@ you are tweaking `skin.rsn` by hand.
 2. Close RadioSure.
 3. Double-click **`Update Stations.cmd`**. Takes about two minutes.
 
+![The updater running](screenshot-updater.png)
+
 It downloads the current Radio-Browser directory, converts it to `.rsd`, and
 installs it. Your previous database is moved to `Stations\_previous\` rather
 than deleted, and `RadioSure.xml` — your favourites, history and settings — is
 never written to.
+
+That is the run going well. What the picture cannot show is the part that
+matters most on a bad day: Radio-Browser throttles bulk requests, and when it
+answers with a `503` the script backs off and retries rather than falling over
+or — worse — installing a half-downloaded list.
 
 ### What it does to the list
 
@@ -246,13 +256,17 @@ connection. No installs, no modules, no dependencies.
 - **Fallout**, **Vault-Tec** and the Radiation King are trademarks of **Bethesda
   Softworks**. These skins are unofficial fan work, made with respect and no
   affiliation. No game assets are used or redistributed.
-- **How the artwork is made.** Four of the five skins are drawn entirely in code
+- **How the artwork is made.** Four of the six skins are drawn entirely in code
   — every gradient, knob, grille and speck of grit is a `System.Drawing` call in
   a PowerShell script, with no photographs, no clip art and no hand-painted
-  files. **Hallows Eve Photo** is the exception: its background is a photographic
-  render, and the source image ships in `Skins\source\` so the skin can be
-  rebuilt.
-- **The headstone photograph** in Hallows Eve Photo was generated with
+  files. **Hallows Eve Photo** and **Gramophone** are the exceptions: their
+  backgrounds are rendered images, and both source files ship in
+  `Skins\source\`. Everything laid over those backgrounds — plates, wells,
+  keys, sliders, spectrum — is drawn in code like the rest. Hallows Eve Photo
+  can be rebuilt end to end from its generator; the Gramophone's layout was
+  placed by hand against its render, so it has no generator here.
+- **The rendered backgrounds** — the headstone in Hallows Eve Photo, and the
+  gramophone — were generated with
   **Nano Banana**, Google's image model, from text prompts written by the author.
   It is not a photograph of a real grave, not stock imagery, and not anyone
   else's work — the image was rendered to order for this skin, and the prompt
