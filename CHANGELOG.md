@@ -1,5 +1,40 @@
 # Changelog
 
+## 2026-09-26 — Unicorn, stardust keys, and English Short
+
+### New: Unicorn
+
+716×553 / 292×373. A glitter unicorn over a rendered background; the jewels and
+bells on its collar and the speech bubble are the controls, and the station list
+sits in a magic-mirror board painted into the scene. `Build-UnicornSkin.ps1`
+builds it from the Gramophone, so it reuses every key and setting that skin
+already got right.
+
+It started at 846×653 and was cut to 72% so it fits a 1080p screen at 150%
+scaling — RadioSure is not DPI-aware, so Windows enlarges the whole window.
+Text sizes are set on their own rather than shrinking with the art, so the
+smaller window reads better, not worse.
+
+### Changed: Gramophone
+
+**If you installed it before today, replace the folder.** Hovering a key now
+raises a ring of stardust around it, and pressing it bursts a dimmed swirl. The
+small rune keys, which were hard to find, now light up on hover. Play and Mute
+are re-centred on their gems in both window states; the collapsed ones were
+about 24px too high.
+
+### New: English Short
+
+`Lang\English Short.lng` shortens `Stations found: 48351` to just the number,
+for narrow skins. See the readme for where the language menu hides.
+
+### Worth knowing if you build skins
+
+An empty colour value — `<TextColor></TextColor>` — crashes RadioSure when the
+skin loads. Worse, it has already saved that skin as the current one, so it then
+crashes on every start. The fix is to close it and change `<Skin>` in
+`RadioSure.xml` by hand. `Build-UnicornSkin.ps1` refuses to write any empty tag.
+
 ## 2026-09-01 — Hallows Eve fits a 1080 screen, and you can read it
 
 Both Hallows Eve skins are re-cut. **If you installed them before today, replace

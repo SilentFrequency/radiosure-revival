@@ -187,6 +187,20 @@ Useful specifics:
   will be green whatever your palette is. Plan around it or hide it.
 - `RotatedInfo` is the scrolling station/track text, which suits being placed on
   a tuning-dial strip.
+- `Sources` shows the **stream format** while playing — `MP3, 192 kbps` — not
+  just the word "Sources". Size it for about 13 characters, or it clips at both
+  ends.
+- `FoundNumber` text comes from the language file (`Lang\*.lng`,
+  `<StationsNumber>Stations found: %d</StationsNumber>`), not from the skin.
+  On a narrow skin, shorten the wording there; see `Lang\English Short.lng`.
+
+### An empty value crashes the player
+
+`<TextColor></TextColor>`, or any colour left empty, makes RadioSure crash
+(`0xc0000409`) while loading the skin. By then it has already saved the skin
+as current, so it crashes again on every start. To recover, close it, change
+`<Skin>` in `RadioSure.xml` back to a working skin, and move the broken skin
+folder out. Use `-1` for "system default", never an empty tag.
 
 ### Gotchas when generating skins from PowerShell
 
@@ -194,6 +208,11 @@ Useful specifics:
   script with a confusing error.
 - A hashtable key shadows the property of the same name, so `$h.Count` returns
   the value of a key called `count` if one exists. Use `$h.PSBase.Count`.
+- Variable names are **case-insensitive**: `$P` and `$p` are the same variable.
+  A palette in `$P` overwritten by a `$p = GraphicsPath` later on is how an
+  entire skin once shipped with empty colours (see above).
+- Do not name a helper function `R`. `r` is a built-in alias for
+  `Invoke-History`, and the alias wins.
 - Keep generator scripts pure ASCII, or save them UTF-8 **with** BOM. Windows
   PowerShell reads BOM-less scripts as the system code page and mangles any
   non-ASCII string literals.

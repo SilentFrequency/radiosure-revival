@@ -69,8 +69,8 @@
     </Image>
   </Exit>
   <Play>
-    <x>410</x>
-    <y>388</y>
+    <x>402</x>
+    <y>391</y>
     <width>48</width>
     <height>48</height>
     <visible>1</visible>
@@ -144,8 +144,8 @@
     </Image>
   </Favorites>
   <Mute>
-    <x>591</x>
-    <y>388</y>
+    <x>592</x>
+    <y>393</y>
     <width>48</width>
     <height>44</height>
     <visible>1</visible>
