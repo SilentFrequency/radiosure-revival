@@ -2,7 +2,7 @@
 
 Two things for anyone still running RadioSure in 2026:
 
-1. **Ten skins** — three styled after the 1950s valve radio from Fallout, two
+1. **A growing set of skins** — among them three styled after the 1950s valve radio from Fallout, two
    upright ones cut as a headstone, a wizard's gramophone, a glitter unicorn,
    a well-played-with Meccano radio, a golden cyberpunk boombox, and an accessible
    high-contrast skin.
@@ -122,7 +122,7 @@ Unicorn's count and Golden Aether's timer are cut off.
 
 ## Accessibility
 
-**High Contrast** is the odd one out in this repo. The other nine are
+**High Contrast** is the odd one out in this repo. The rest are
 illustration; this one has a job, and every choice in it is a constraint rather
 than a preference.
 
@@ -378,7 +378,7 @@ connection. No installs, no modules, no dependencies.
   affiliation. No game assets are used or redistributed.
 - **Meccano** is a trademark of its owner. The Mechanno skin is unofficial fan
   work with no affiliation, and its misspelt name is deliberate.
-- **How the artwork is made.** Five of the ten skins are drawn entirely in
+- **How the artwork is made.** Several of the skins are drawn entirely in
   code — every gradient, knob, grille and speck of grit is a `System.Drawing`
   call in a PowerShell script, with no photographs, no clip art and no
   hand-painted files. **Hallows Eve Photo**, **Gramophone**, **Unicorn**,
