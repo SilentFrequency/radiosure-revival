@@ -2,9 +2,10 @@
 
 Two things for anyone still running RadioSure in 2026:
 
-1. **Nine skins** — three styled after the 1950s valve radio from Fallout, two
+1. **Ten skins** — three styled after the 1950s valve radio from Fallout, two
    upright ones cut as a headstone, a wizard's gramophone, a glitter unicorn,
-   a well-played-with Meccano radio, and an accessible high-contrast skin.
+   a well-played-with Meccano radio, a golden cyberpunk boombox, and an accessible
+   high-contrast skin.
 2. **A station database updater** — a PowerShell script that rebuilds RadioSure's
    station list from the live [Radio-Browser](https://www.radio-browser.info)
    directory. About 50,000 working stations, and it can run itself weekly.
@@ -73,6 +74,7 @@ on either build.
 | **Gramophone** | 1040×567 | A wizard's study. The cabinet's own carvings are the controls — the jewels, the cabochons and the runes are the buttons, and the spectrum drifts in the stardust above the record. Hovering a key raises a ring of stardust around it. |
 | **Unicorn** | 716×553 | Loud on purpose. A glitter unicorn whose jewelled collar and speech bubble are the controls, with the station list in a magic-mirror board beside it. Built from the Gramophone by `Build-UnicornSkin.ps1`. Best with **English Short** (below). |
 | **Mechanno** | 874×432 | A radio a child built from a 1960s Meccano set: chipped enamel, parts from two sets, pencil scribbles on the control plate. The five knobs are the main controls, and the small keys are brass nuts bolted over the top girder's holes. Toggles stay lit while on: an orange ring for playing, red for muted or recording. The station list sits in a bay left empty in the build. Built from the Gramophone by `Build-MechannoSkin.ps1`. |
+| **Golden Aether** | 991×491 | A golden cyberpunk boombox on a desk in a stone room, beside a gold-framed glass panel that holds the station list. The radio's own knobs and speakers are the controls: the big speaker hubs are Play and Mute, the lower speakers are Rec, Back, Next and Always on Top, and a spare brass knob fills an empty slot as Expand. The spectrum plays in the radio's golden screen, and the running time has a dark window of its own. Built from Mechanno by `Build-GoldenAetherSkin.ps1`. Best with **English Short** (below). |
 
 Every skin includes both the expanded and the collapsed window state. As with
 the other skins, some things in the artwork are left for you to find rather
@@ -95,6 +97,8 @@ The photo skin's source image doubles as a matching wallpaper:
 
 ![Mechanno](screenshot-mechanno.png)
 
+![Golden Aether](screenshot-golden-aether.png)
+
 ### Shorter labels: English Short
 
 Some wording in the player comes from RadioSure's language file, not from the
@@ -102,19 +106,23 @@ skin, so no skin can change it. The one that hurts is the count beside the
 search box, which RadioSure writes as `Stations found: 48351` — too long for a
 narrow skin, where it gets cut off as `Stations f...`.
 
-`Lang\English Short.lng` is RadioSure's own English file with that single line
-changed to show just the number. Everything else is untouched.
+`Lang\English Short.lng` is RadioSure's own English file with two lines changed.
+The count shows just the number. The status line drops the word `Playing`, so
+while a station plays it shows only the running time, `(04:28)`: a clock that
+keeps counting explains itself. Everything else is untouched, so `Connecting...`,
+`Buffering...` and `Stopped.` still read in full.
 
 1. Copy it into the `Lang` folder next to `RadioSure.exe`.
 2. **Right-click** the RadioSure tray icon → **Language** → **English Short**.
    The language choice is not in Options, which is where everyone looks first.
 
 It applies to every skin, and choosing **English** again puts it back. The
-Unicorn skin is sized for it: with the full wording its count is cut off.
+Unicorn and Golden Aether skins are sized for it: with the full wording the
+Unicorn's count and Golden Aether's timer are cut off.
 
 ## Accessibility
 
-**High Contrast** is the odd one out in this repo. The other eight are
+**High Contrast** is the odd one out in this repo. The other nine are
 illustration; this one has a job, and every choice in it is a constraint rather
 than a preference.
 
@@ -370,20 +378,22 @@ connection. No installs, no modules, no dependencies.
   affiliation. No game assets are used or redistributed.
 - **Meccano** is a trademark of its owner. The Mechanno skin is unofficial fan
   work with no affiliation, and its misspelt name is deliberate.
-- **How the artwork is made.** Five of the nine skins are drawn entirely in
+- **How the artwork is made.** Five of the ten skins are drawn entirely in
   code — every gradient, knob, grille and speck of grit is a `System.Drawing`
   call in a PowerShell script, with no photographs, no clip art and no
-  hand-painted files. **Hallows Eve Photo**, **Gramophone**, **Unicorn** and
-  **Mechanno** are the exceptions: their backgrounds are rendered images, and the source files
+  hand-painted files. **Hallows Eve Photo**, **Gramophone**, **Unicorn**,
+  **Mechanno** and **Golden Aether** are the exceptions: their backgrounds are
+  rendered images, and the source files
   ship in `Skins\source\`. Everything laid over those backgrounds — plates,
   wells, keys, sliders, spectrum — is drawn in code like the rest. Hallows Eve
-  Photo, Unicorn and Mechanno can be rebuilt end to end from their generators; the
+  Photo, Unicorn, Mechanno and Golden Aether can be rebuilt end to end from their
+  generators; the
   Gramophone's layout was placed by hand against its render, so it has no
   generator here.
 - **The stardust** on the Gramophone and Unicorn keys is cut from a rendered
   sheet of swirls; the two frames used are in `Skins\source\stardust\`.
 - **English Short** is a modified copy of RadioSure's own English language
-  file, by TheBestware Studio, with one line shortened.
+  file, by TheBestware Studio, with two lines shortened.
 - **The rendered backgrounds** — the headstone in Hallows Eve Photo, the
   gramophone, the unicorn, the Meccano radio and the stardust — were generated with
   **Nano Banana**, Google's image model, from text prompts written by the author.
@@ -392,6 +402,11 @@ connection. No installs, no modules, no dependencies.
   behind it is the author's own. The name and dates carved into it are invented.
   Everything laid over that background — the plates, the wells, the keys, the
   spectrum — is drawn in code like the rest.
+- **Golden Aether** is two renders put together. The golden radio was restyled
+  with **VisionFX**, an AI plug-in for PaintShop Pro, from an earlier render by
+  the author; the stone room and the framed glass panel are a **Nano Banana**
+  render. The build script sets the radio into the room and widens the panel in
+  code. Both source images are in `Skins\source\`.
 
 The skin artwork and the scripts are free to use, modify and share. A credit is
 appreciated but not required. If you make a nicer colourway, please post it —

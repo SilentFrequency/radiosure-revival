@@ -1,5 +1,41 @@
 # Changelog
 
+## 2026-09-27 — Golden Aether
+
+### New: Golden Aether
+
+991×491 / 439×251. A golden cyberpunk boombox on a desk in a stone room, and
+beside it a gold-framed glass panel that holds the station list. The radio's
+own knobs and speakers are the controls, placed on the render as it really is
+rather than on a tidy grid, because no two of its knobs are quite symmetrical.
+A spare brass knob, copied from the one beside it, fills an empty slot as
+Expand, since an empty socket reads as a missing button. The spectrum plays in
+the radio's golden screen. The running time has its own dark window, painted
+over a slot whose pale chrome drowned the text.
+
+The radio and the room are two renders. `Build-GoldenAetherSkin.ps1` sets the
+radio into the room, then cuts the glass panel at two plain pipes on its top
+bar and stretches only those, so the list got wider while the gears and corner
+medallions kept their shape. It builds from Mechanno.
+
+### English Short: the status line shows just the time
+
+`<Playing>` is now a single space, so while a station plays the status reads
+`(04:28)` instead of `Playing (04:28)`. The other status messages are unchanged.
+
+### Worth knowing if you build skins
+
+- Make the list panel **wider than it is tall**. A tall panel starves the
+  Country, Genre and Language columns, and widening it afterwards costs space
+  everywhere else.
+- There is no bold or font setting. `GlowColor` draws a coloured glow behind
+  the text, which is not the same thing, and over art that is already backlit
+  it looks doubled.
+- A language string can be blanked with a single space. Do not leave it empty.
+- Check the **collapsed** view of anything built from another skin. Readouts that
+  the base hid there come back blank if their box is under about 15px tall, and
+  on a grey bar if their background was never set. The Golden Aether build now
+  fails on both.
 ## 2026-09-26 — Mechanno
 
 ### New: Mechanno

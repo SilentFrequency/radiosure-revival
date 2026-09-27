@@ -193,6 +193,13 @@ Useful specifics:
 - `FoundNumber` text comes from the language file (`Lang\*.lng`,
   `<StationsNumber>Stations found: %d</StationsNumber>`), not from the skin.
   On a narrow skin, shorten the wording there; see `Lang\English Short.lng`.
+- `Status` shows the word from `<Playing>` in the language file, then the
+  elapsed time in brackets: `Playing (04:28)`. The brackets and time come from
+  the player. Set `<Playing>` to a **single space** to show just `(04:28)`;
+  English Short does. A space works where an empty tag is a risk (see below).
+- There is **no bold, font or weight setting**. The text controls take
+  `TextSize`, `TextAlign`, `TextColor`, `BkColor` and `GlowColor`. The glow is
+  a coloured halo behind the letters, not a heavier stroke.
 
 ### An empty value crashes the player
 
@@ -213,6 +220,9 @@ folder out. Use `-1` for "system default", never an empty tag.
   entire skin once shipped with empty colours (see above).
 - Do not name a helper function `R`. `r` is a built-in alias for
   `Invoke-History`, and the alias wins.
+- File names are case-insensitive too. Deleting an inherited `sources-pressed.png`
+  after writing a new `Sources-pressed.png` deletes the new one. Remove the old
+  name first, then write.
 - Keep generator scripts pure ASCII, or save them UTF-8 **with** BOM. Windows
   PowerShell reads BOM-less scripts as the system code page and mangles any
   non-ASCII string literals.
