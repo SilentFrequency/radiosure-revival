@@ -403,7 +403,7 @@ connection. No installs, no modules, no dependencies.
   Everything laid over that background — the plates, the wells, the keys, the
   spectrum — is drawn in code like the rest.
 - **Golden Aether** is two renders put together. The golden radio was restyled
-  with **VisionFX**, an AI plug-in for PaintShop Pro, from an earlier render by
+  with **VisionFX** by **Distinct AI**, a plug-in for PaintShop Pro, from an earlier render by
   the author; the stone room and the framed glass panel are a **Nano Banana**
   render. The build script sets the radio into the room and widens the panel in
   code. Both source images are in `Skins\source\`.
