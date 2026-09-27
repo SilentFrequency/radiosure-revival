@@ -1,5 +1,28 @@
 # Changelog
 
+## 2026-09-26 — Mechanno
+
+### New: Mechanno
+
+874×432 / 562×228. A radio a child built from a 1960s Meccano set: chipped
+enamel, parts from two different sets, spare gears bolted on just because, and
+pencil scribbles on the control plate. The background is a Nano Banana render;
+the loose nuts and bolts it left in the bay are painted out in code, and the
+station list sits in that bay.
+
+The keys are new, not the Gramophone's. The five knobs carry a symbol stamped
+into the cap, and a ring lights around a knob when you hover over it. Toggles
+stay lit while they are on, as on the Deluxe: orange for playing, red for muted
+or recording. The small keys are brass nuts, one on every other hole of the top
+girder, with a drop shadow so they do not vanish into the yellow.
+`Build-MechannoSkin.ps1` builds it from the Gramophone.
+
+### Worth knowing if you build skins
+
+- A plain amber glow disappears against a yellow panel. Use a deeper orange.
+- RadioSure squeezes the volume thumb into its own proportions whatever shape
+  the image is, so a square thumb comes out narrow.
+
 ## 2026-09-26 — Unicorn, stardust keys, and English Short
 
 ### New: Unicorn
